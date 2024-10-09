@@ -9,7 +9,7 @@ public class Solution {
 
     static int T,N,answer;
     static int[][] board;
-    static List<WhiteHallPoint> whiteHallPointList;
+    static List<Point> whiteHallList;
     static int[][] changeDirections = {
             {},
             {2, 3, 1, 0},
@@ -19,111 +19,78 @@ public class Solution {
             {2, 3, 0, 1}
     };
 
-    static int[][][] visit;
+    static class Point{
+        int y,x;
 
-    static class WhiteHallPoint{
-        int y,x,num,id;
-
-        WhiteHallPoint(int y, int x, int num, int id){
+        Point(int y, int x){
             this.y = y;
             this.x = x;
-            this.num = num;
-            this.id = id;
         }
     }
 
     static int[] dy = {-1,0,1,0};
     static int[] dx = {0,1,0,-1};
 
-    static class Ball{
-        int y,x,sy,sx,d,score,moveCnt;
+    static int gameStart(int sy, int sx, int sd){
+        int score = 0;
+        boolean flag = false;
 
-        Ball(int y, int x, int sy, int sx, int score){
-            this.y = y;
-            this.x = x;
-            this.sy = sy;
-            this.sx = sx;
-            this.score = score;
-            this.moveCnt = 0;
+        int y = sy;
+        int x = sx;
+        int d = sd;
+
+        while(true){
+            if(sy==y && sx==x && flag || board[y][x]==-1) break;
+
+            y = y + dy[d];
+            x = x + dx[d];
+            flag = true;
+
+            if(y<0 || y>=N || x<0 || x>=N){
+                y = y - dy[d];
+                x = x - dx[d];
+                d = (d+2)%4;
+                score++;
+            }
+
+            if(1<=board[y][x] && board[y][x]<=5){
+                int num = board[y][x];
+                d = changeDirections[num][d];
+                score++;
+            } else if(6<=board[y][x] && board[y][x]<=10){
+                Point hall = move(y,x);
+                y = hall.y;
+                x = hall.x;
+            }
+
         }
+
+        return score;
     }
 
-    static Ball moveWhiteHall(Ball ball){
-        int num = board[ball.y][ball.x];
+    static Point move(int ny, int nx) {
+        int num = board[ny][nx];
 
-        for(WhiteHallPoint point : whiteHallPointList){
-            if(point.num==num && (point.y != ball.y || point.x != ball.x)){
-                ball.y = point.y;
-                ball.x = point.x;
-                return ball;
+        for(Point p : whiteHallList){
+            if(board[p.y][p.x]==num && (p.y!=ny || p.x!=nx)){
+                return new Point(p.y, p.x);
             }
         }
 
         return null;
     }
 
-    static int gameStart(int sy, int sx){
-        Queue<Ball> queue = new LinkedList<>();
-        queue.offer(new Ball(sy, sx, sy, sx, 0));
-
-        while(!queue.isEmpty()){
-            Ball ball = queue.poll();
-
-            //changeDirections[][];
-
-            for(int i=0; i<4; i++){
-                int ny = ball.y + dy[i];
-                int nx = ball.x + dx[i];
-
-                // 이동할 위치가 블랙홀 또는 시작점인 경우, 최고 점수 갱신
-                if(board[ny][nx]==-1 || ny==sy && nx==sx && ball.moveCnt!=0){
-                    answer = Math.max(answer, ball.score);
-                    continue;
-                }
-
-                // 이동할 위치가 웜홀이라면, 정해진 위치로 이동
-                if(6<=board[ball.y][ball.x] && board[ball.y][ball.x]<=10) {
-                    queue.offer(moveWhiteHall(ball));
-                    continue;
-                }
-
-
-
-
-
-            }
-
-
-            // 2. 바라보는 방향으로 이동
-            int ny = ball.y + dy[ball.d];
-            int nx = ball.x + dx[ball.d];
-
-            // 2.1 벽을 만난 경우, 방향 반대로 변경
-            if(ny<0 || nx<0 || ny>=N || nx>=N) {
-                ball.d = (ball.d + 2) % 4;
-                ball.score++;
-            } else{
-                ball.y = ny;
-                ball.x = nx;
-            }
-
-            ball.moveCnt++;
-            queue.offer(ball);
-        }
-
-        return 0;
-    }
-
     static void solution(int t){
         answer = 0;
-        visit = new int[N][N][4];
 
         for(int i=0; i<N; i++){
             for(int j=0; j<N; j++){
                 if(board[i][j]!=0) continue;
 
-                int cnt = gameStart(i,j);
-                answer = Math.max(answer, cnt);
+                for(int d=0; d<4; d++){
+                    int cnt = gameStart(i,j,d);
+                    answer = Math.max(answer, cnt);
+                }
             }
         }
 
@@ -140,7 +107,7 @@ public class Solution {
             N = Integer.parseInt(st.nextToken());
 
             board = new int[N][N];
-            whiteHallPointList = new ArrayList<>();
+            whiteHallList = new ArrayList<>();
 
             for(int i=0; i<N; i++){
                 st = new StringTokenizer(bf.readLine());
@@ -148,7 +115,7 @@ public class Solution {
                     board[i][j] = Integer.parseInt(st.nextToken());
 
                     if(6<=board[i][j] && board[i][j]<=10)
-                        whiteHallPointList.add(new WhiteHallPoint(i, j, board[i][j], whiteHallPointList.size()));
+                        whiteHallList.add(new Point(i,j));
                 }
             }
 

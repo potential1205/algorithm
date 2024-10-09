@@ -3,61 +3,54 @@ package algorithm_study.week11.b2632_피자판매;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.StringTokenizer;
+import java.util.*;
 
 public class Main {
 
-    static int target,answer;
+    static int target;
     static int N,M;
-    static int[] arr1, arr2;
-    static List<Integer> info1, info2;
+    static int[] arr1, arr2, sum1, sum2, answer1, answer2;
 
     static void solution(){
-        int cum = 0;
+        sum1[1] = arr1[1];
+        for(int i=2; i<=2*N; i++){
+            sum1[i] = sum1[i-1] + arr1[i];
+        }
 
-        for(int i=0; i<N; i++){ // 시작점
-            cum = 0;
+        sum2[1] = arr2[1];
+        for(int i=2; i<=2*M; i++){
+            sum2[i] = sum2[i-1] + arr2[i];
+        }
 
-            for(int j=0; j<N; j++){ // 길이
-                cum += arr1[(i+j)%N];
-                info1.add(cum);
+        answer1 = new int[target+1];
+        for(int i=1; i<N; i++){
+            for(int s=1; s<=N; s++){
+                int val = sum1[s+i-1] - sum1[s-1];
+                if(val>target) continue;
+                answer1[val]++;
             }
         }
 
-        for(int i=0; i<M; i++){ // 시작점
-            cum = 0;
+        if (sum1[N] <= target) answer1[sum1[N]]++;
 
-            for(int j=0; j<M; j++){ // 길이
-                cum += arr2[(i+j)%M];
-                info2.add(cum);
+        answer2 = new int[target+1];
+        for(int i=1; i<M; i++){
+            for(int s=1; s<=M; s++){
+                int val = sum2[s+i-1] - sum2[s-1];
+                if(val>target) continue;
+                answer2[val]++;
             }
         }
 
-        info1.add(0);
-        info2.add(0);
+        if (sum2[M] <= target) answer2[sum2[M]]++;
 
-        Collections.sort(info1);
-        Collections.sort(info2);
-
-        int startIndex = 0;
-        int endIndex = info2.size();
-
-        for(int i=0; i<info1.size(); i++){
-            for(int j=0; j<endIndex; j++){
-                int val = info1.get(i) + info2.get(j);
-
-                if(val==target){
-                    answer++;
-                } else if(val<target){
-                    continue;
-                } else if(val>target){
-                    endIndex = j;
-                    break;
-                }
-            }
+        int answer = 0;
+        answer += answer1[target];
+        answer += answer2[target];
+        for (int i = 1; i < target; i++) {
+            int sizeA = i;
+            int sizeB = target - sizeA;
+            answer += answer1[sizeA] * answer2[sizeB];
         }
 
         System.out.println(answer);
@@ -72,19 +65,20 @@ public class Main {
         N = Integer.parseInt(st.nextToken());
         M = Integer.parseInt(st.nextToken());
 
-        info1 = new ArrayList<>();
-        info2 = new ArrayList<>();
-
-        arr1 = new int[N];
-        for(int i=0; i<N; i++){
+        arr1 = new int[2*N+1];
+        sum1 = new int[2*N+1];
+        for(int i=1; i<=N; i++){
             st = new StringTokenizer(bf.readLine());
             arr1[i] = Integer.parseInt(st.nextToken());
+            arr1[i+N] = arr1[i];
         }
 
-        arr2 = new int[M];
-        for(int i=0; i<M; i++){
+        arr2 = new int[2*M+1];
+        sum2 = new int[2*M+1];
+        for(int i=1; i<=M; i++){
             st = new StringTokenizer(bf.readLine());
             arr2[i] = Integer.parseInt(st.nextToken());
+            arr2[i+M] = arr2[i];
         }
 
         solution();
