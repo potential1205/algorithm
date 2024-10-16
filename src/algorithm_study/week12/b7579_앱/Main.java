@@ -18,12 +18,6 @@ public class Main {
         // 즉, 첫번째 앱이 주어진 비용을 초과하지 않고 비활성화 될 수 있는지 판단
         // 된다면 확보하개되는 메모리 크기 저장
         // => 하나의 앱이 비용을 만족할 때 확보되는 최대 메모리 크기는 자신의 메모리 크기와 동일함
-        for (int j = 0; j <= totalCost; j++) {
-            if (costArr[1] <= j) {
-                dp[1][j] = memoryArr[1];
-            }
-        }
-
         for (int i = 1; i <= N; i++) { // 앱
             int memory = memoryArr[i];
             int cost = costArr[i];

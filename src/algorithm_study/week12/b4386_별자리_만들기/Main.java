@@ -38,7 +38,7 @@ public class Main {
     }
 
     static void kruskal(){
-
+        
     }
 
     static void prim(){

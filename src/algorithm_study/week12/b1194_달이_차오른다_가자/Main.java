@@ -58,7 +58,7 @@ public class Main {
                 }
 
                 if('A' <= board[ny][nx] && board[ny][nx] <= 'F'){
-                    int keyIndex = 1 << (5-((int) board[ny][nx]-97));
+                    int keyIndex = 1 << (5-((int) board[ny][nx]-65));
 
                     if((cur.keyNum & keyIndex) != 0){
                         queue.offer(new Point(ny, nx, cur.cnt+1, cur.keyNum));
