@@ -21,41 +21,9 @@ public class Main {
         }
     }
 
-    static int findBorder() {
-        PriorityQueue<Point> pq = new PriorityQueue();
-        boolean[][] visit = new boolean[N][M];
-
-
-        while (!pq.isEmpty()) {
-            Point cur = pq.poll();
-
-            for (int i = 0; i < 4; i++) {
-                int ny = cur.y + dy[i];
-                int nx = cur.x + dx[i];
-
-                if (ny < 0 || nx < 0 || ny >= N || nx >= M || visit[ny][nx]) {
-                    continue;
-                }
-
-                if (board[ny][nx] == 'X' || board[ny][nx] == '.') {
-                    pq.offer(new Point(ny, nx, cur.cnt+1));
-                    visit[ny][nx] = true;
-                }
-            }
-
-        }
-
-        return 0;
-    }
 
     static void solution() {
         answer = 0;
-
-        while (true) {
-            findBorder();
-            melting();
-        }
-        System.out.println(answer);
     }
 
     public static void main(String[] args) throws IOException {
