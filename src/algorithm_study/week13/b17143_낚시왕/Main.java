@@ -14,15 +14,12 @@ public class Main {
 
     static int[] dy = {-1, 1, 0, 0};
     static int[] dx = {0, 0, 1,-1};
-
     static List<Shark> sharkList;
-    static int minY;
 
     static class Shark implements Comparable<Shark> {
         int y, x, s, d, z;
 
-        Shark(){
-        }
+        Shark() {}
 
         Shark(int y, int x, int s, int d, int z) {
             this.y = y;
@@ -35,17 +32,6 @@ public class Main {
         @Override
         public int compareTo(Shark o) {
             return o.z - this.z;
-        }
-
-        @Override
-        public String toString() {
-            return "Shark{" +
-                    "y=" + y +
-                    ", x=" + x +
-                    ", s=" + s +
-                    ", d=" + d +
-                    ", z=" + z +
-                    '}';
         }
     }
 
@@ -66,11 +52,11 @@ public class Main {
                 }
             }
 
+            // 상어 사냥
             Shark selectedShark = new Shark();
             int index = -1;
-            minY = R;
+            int minY = R;
 
-            // 상어 사냥
             for (int i = 0; i < sharkList.size(); i++) {
                 Shark s = sharkList.get(i);
 
@@ -90,8 +76,15 @@ public class Main {
             for (Shark s : sharkList) {
                 int ny = s.y;
                 int nx = s.x;
+                int size;
 
-                for (int i = 0; i < s.s; i++) {
+                if (s.d==0 || s.d==1) {
+                    size = (s.s % (2*R-2));
+                } else {
+                    size = (s.s % (2*C-2));
+                }
+
+                for (int i = 0; i < size; i++) {
                     int ky = ny + dy[s.d];
                     int kx = nx + dx[s.d];
 
