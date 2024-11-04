@@ -1,4 +1,4 @@
-name: Move Date Folder to 코드트리
+name: Move Date Folder to 코드트리 and Merge Files if Folder Exists
 
 on:
   push:
@@ -13,21 +13,19 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      - name: Find, move, and delete date folders
+      - name: Find, move, and merge files if date folder exists
         run: |
           mkdir -p 코드트리
           for folder in $(ls -d */ | grep -E '^[0-9]{6}/'); do
             TARGET_FOLDER="코드트리/${folder%/}"  # 이동할 폴더 이름 생성 (폴더 이름 끝의 슬래시 제거)
-            
-            # 코드트리에 동일한 날짜 폴더가 있는 경우 삭제
-            if [ -d "$TARGET_FOLDER" ]; then
-              echo "Removing existing folder $TARGET_FOLDER"
-              rm -rf "$TARGET_FOLDER"
-            fi
 
-            # 날짜 폴더 이동
-            echo "Moving folder $folder to 코드트리/"
-            mv "$folder" 코드트리/
+            if [ -d "$TARGET_FOLDER" ]; then
+              echo "Merging files from $folder to existing $TARGET_FOLDER"
+              mv "$folder"* "$TARGET_FOLDER/"  # 폴더가 존재하면 파일만 이동
+            else
+              echo "Moving folder $folder to 코드트리/"
+              mv "$folder" 코드트리/  # 폴더가 존재하지 않으면 전체 폴더 이동
+            fi
 
             # 루트의 기존 날짜 폴더 삭제
             rm -rf "$folder"
@@ -38,5 +36,5 @@ jobs:
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
           git add -A
-          git commit -m "Move date folder to 코드트리 folder and remove from root"
+          git commit -m "Move or merge date folder contents to 코드트리 and remove from root"
           git push
