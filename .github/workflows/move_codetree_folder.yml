@@ -3,7 +3,7 @@ name: Move Date Folder to 코드트리 and Clean Up Root
 on:
   push:
     paths:
-      - '221110/**'  # 특정 날짜 폴더가 생성될 때만 트리거
+      - '**'  # 특정 날짜 폴더가 생성될 때만 트리거
 
 jobs:
   move_and_cleanup_date_folder:
