@@ -1,4 +1,4 @@
-name: Move CodeTree Files to root/codetree
+name: Move CodeTree Files to root/코드트리
 
 on:
   push:
@@ -15,7 +15,7 @@ jobs:
 
       - name: Move and organize CodeTree files
         run: |
-          TARGET_DIR="codetree"
+          TARGET_DIR="코드트리"
           mkdir -p "$TARGET_DIR"
 
           # 현재 날짜 가져오기 (형식: yymmdd)
@@ -43,5 +43,5 @@ jobs:
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
           git add -A
-          git commit -m "Organize CodeTree files for date $DATE in root/codetree"
+          git commit -m "Organize CodeTree files for date $DATE in root/코드트리"
           git push
