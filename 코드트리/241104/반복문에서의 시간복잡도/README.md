@@ -1,4 +1,4 @@
-# [시간복잡도와 반복문 2 ](https://www.codetree.ai/missions/6/problems/time-complexity-and-for-loop-2)
+# [반복문에서의 시간복잡도 ](https://www.codetree.ai/missions/6/problems/time-complexity-2)
 
 |유형|문제 경험치|난이도|
 |---|---|---|
