@@ -1,0 +1,29 @@
+name: Move Date Folder to 코드트리
+
+on:
+  push:
+    paths:
+      - '**'  # 루트 디렉토리의 모든 변경 사항을 감지
+
+jobs:
+  move_date_folder:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Find and move date folders
+        run: |
+          mkdir -p 코드트리
+          for folder in $(ls -d */ | grep -E '^[0-9]{6}/'); do
+            mv "$folder" 코드트리/
+          done
+
+      - name: Commit and push changes
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add 코드트리/*
+          git commit -m "Move date folder to 코드트리 folder"
+          git push
