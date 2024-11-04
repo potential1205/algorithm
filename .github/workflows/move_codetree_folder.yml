@@ -17,6 +17,10 @@ jobs:
         run: |
           mkdir -p 코드트리
           for folder in $(ls -d */ | grep -E '^[0-9]{6}/'); do
+            if [ -d "코드트리/$folder" ]; then
+              echo "Removing existing folder 코드트리/$folder"
+              rm -rf "코드트리/$folder"  # 기존 폴더 삭제
+            fi
             echo "Moving folder $folder to 코드트리/"
             mv "$folder" 코드트리/
             rm -rf "$folder"  # 루트의 기존 날짜 폴더 삭제
