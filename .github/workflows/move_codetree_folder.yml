@@ -17,9 +17,20 @@ jobs:
         run: |
           mkdir -p 코드트리
           for folder in $(ls -d */ | grep -E '^[0-9]{6}/'); do
+            TARGET_FOLDER="코드트리/${folder%/}"  # 이동할 폴더 이름 생성 (폴더 이름 끝의 슬래시 제거)
+            
+            # 코드트리에 동일한 날짜 폴더가 있는 경우 삭제
+            if [ -d "$TARGET_FOLDER" ]; then
+              echo "Removing existing folder $TARGET_FOLDER"
+              rm -rf "$TARGET_FOLDER"
+            fi
+
+            # 날짜 폴더 이동
             echo "Moving folder $folder to 코드트리/"
             mv "$folder" 코드트리/
-            rm -rf "$folder"  # 루트의 기존 날짜 폴더 삭제
+
+            # 루트의 기존 날짜 폴더 삭제
+            rm -rf "$folder"
           done
 
       - name: Commit and push changes
