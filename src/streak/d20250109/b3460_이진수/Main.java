@@ -1,4 +1,4 @@
-package streak.d20251019.b3460_이진수;
+package streak.d20250109.b3460_이진수;
 
 import java.util.ArrayList;
 import java.util.List;
