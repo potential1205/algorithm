@@ -6,8 +6,9 @@ import java.io.InputStreamReader;
 import java.util.HashMap;
 import java.util.Map;
 
-
 public class Main {
+
+    static StringBuilder sb = new StringBuilder();
 
     static boolean solve(String input, String output) {
         Map<Character, Integer> map = new HashMap<>();
@@ -50,12 +51,14 @@ public class Main {
             if (input.equals("END")) break;
 
             if (solve(input, output)) {
-                System.out.println("Case " + tc + ": same");
+                sb.append("Case " + tc + ": same").append("\n");
             } else {
-                System.out.println("Case " + tc + ": different");
+                sb.append("Case " + tc + ": different").append("\n");
             }
 
             tc++;
         }
+
+        System.out.println(sb);
     }
 }
