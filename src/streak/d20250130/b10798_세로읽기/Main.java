@@ -11,7 +11,7 @@ public class Main {
         BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
         StringTokenizer st;
 
-        Character[][] arr = new Character[15][15];
+        Character[][] arr = new Character[5][15];
 
         for(int i = 0; i < 5; i++) {
             String str = bf.readLine();
@@ -24,7 +24,7 @@ public class Main {
         StringBuilder sb = new StringBuilder();
 
         for (int i = 0; i < 15; i++) {
-            for (int j = 0; j < 15; j++) {
+            for (int j = 0; j < 5; j++) {
                 if (arr[j][i] != null) {
                     sb.append(arr[j][i]);
                 }
