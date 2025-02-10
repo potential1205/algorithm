@@ -9,19 +9,14 @@ import java.util.StringTokenizer;
 public class Main {
 
     static int N, C, M ,answer;
+
     static class Node implements Comparable<Node> {
         int a,b,c;
 
         Node(int a, int b, int c) {
-            this.a = a;
-            this.b = b;
-            this.c = c;
-        }
-
-        Node(int b, int c) {
-            this.a = 0;
-            this.b = b;
-            this.c = c;
+            this.a = a; // start
+            this.b = b; // end
+            this.c = c; // amount
         }
 
         @Override
@@ -71,7 +66,7 @@ public class Main {
             for (int j = 1; j <= N; j++) {
                 if (t==j) {
                     answer += posts[j];
-                    store = store - posts[j];
+                    store -= posts[j];
                     posts[j] = 0;
                 }
             }
@@ -83,6 +78,7 @@ public class Main {
                 store += node.c;
             }
 
+            // 버리기
             int idx = N;
             while(store > C) {
                 if (posts[idx]!=0) {
