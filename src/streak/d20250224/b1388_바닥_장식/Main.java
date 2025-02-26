@@ -2,12 +2,25 @@ package streak.d20250224.b1388_바닥_장식;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.util.LinkedList;
+import java.util.Queue;
 import java.util.StringTokenizer;
 
 public class Main {
     static int N, M;
     static char[][] arr;
     static boolean[][] visit;
+    static int[] dy = {-1, 1, 0 ,0};
+    static int[] dx = {0, 0, -1, 1};
+
+    static class Node {
+        int y, x;
+
+        Node(int y, int x) {
+            this.y = y;
+            this.x = x;
+        }
+    }
 
     static void dfs(int y, int x, boolean row) {
         visit[y][x] = true;
@@ -24,6 +37,35 @@ public class Main {
             }
         }
 
+    }
+
+    static void bfs(int sy, int sx, char ch) {
+        Queue<Node> queue = new LinkedList<>();
+        queue.offer(new Node(sy, sx));
+        visit[sy][sx] = true;
+
+        while (!queue.isEmpty()) {
+            Node node = queue.poll();
+
+            //System.out.println("방문점: " + node.y + " " + node.x);
+
+            for (int i = 0; i < 4; i++) {
+                int ky = node.y + dy[i];
+                int kx =  node.x + dx[i];
+
+                if (ky < 0 || kx < 0 || ky >= N || kx >= M || visit[ky][kx]) continue;
+
+                if (ch == arr[ky][kx]) {
+                    if ((i == 2 || i == 3) && arr[ky][kx] == '-') {
+                        queue.offer(new Node(ky, kx));
+                        visit[ky][kx] = true;
+                    } else if ((i == 0 || i == 1) && arr[ky][kx] != '-') {
+                        queue.offer(new Node(ky, kx));
+                        visit[ky][kx] = true;
+                    }
+                }
+            }
+        }
     }
 
     public static void main(String[] args) throws Exception {
@@ -50,11 +92,12 @@ public class Main {
                 if(visit[i][j]) continue;
 
                 if(arr[i][j] == '-') {
-                    dfs(i, j, true);
+                    bfs(i, j, arr[i][j]);
                 } else {
-                    dfs(i, j, false);
+                    bfs(i, j, arr[i][j]);
                 }
 
+                //System.out.println("시작점: " + i + " " + j);
                 cnt++;
             }
         }
