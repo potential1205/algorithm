@@ -3,60 +3,42 @@ package streak.d20250301.b14725_개미굴;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.StringTokenizer;
+import java.util.*;
 
 public class Main {
 
     static int n;
     static Node root, point;
 
-    static class Node implements Comparable<Node>{
+    static class Node {
         String data;
-        int childCount;
-        List<Node> childList;
+        TreeMap<String, Node> childMap;
 
         Node() {
-            this.childList = new ArrayList<>();
-            this.childCount = 0;
+            this.childMap = new TreeMap<>();
         }
 
-        Node(String data) {
-            this.data = data;
-            this.childList = new ArrayList<>();
-            this.childCount = 0;
+        Node(String str) {
+            this.data = str;
+            this.childMap = new TreeMap<>();
         }
 
-        List<Node> getChildList() {
-            return this.childList;
+        Iterable<Node> getChildNodes() {
+            return childMap.values();
         }
 
         void addChild(Node newChild) {
-            this.childList.add(newChild);
-            this.childCount++;
-            Collections.sort(childList);
+            this.childMap.put(newChild.data, newChild);
         }
 
         Node findNode(String str) {
-            for (Node node : childList) {
-                if (node.data.equals(str)) {
-                    return node;
-                }
-            }
-
-            return null;
-        }
-
-        @Override
-        public int compareTo(Node o) {
-            return this.data.compareTo(o.data);
+            return childMap.get(str);
         }
     }
 
     static void recursion(Node node, int depth) {
-        for (Node child : node.getChildList()) {
+        for (Node child : node.getChildNodes()) {
+
             for (int i = 0; i < depth; i++) {
                 System.out.print("--");
             }
