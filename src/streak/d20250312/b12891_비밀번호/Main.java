@@ -46,7 +46,9 @@ public class Main {
 
         for (int i = 0; i < m; i++) {
             int idx = getIdx(str.charAt(i));
-            if (idx != -1) source[idx]++;
+            if (idx != -1) {
+                source[idx]++;
+            }
         }
 
         for (int i = 0; i < 4; i++) {
@@ -59,10 +61,14 @@ public class Main {
 
         for (int i = m; i < n; i++) {
             int idx = getIdx(str.charAt(i));
-            if (idx != -1) source[idx]++;
+            if (idx != -1) {
+                source[idx]++;
+            }
 
             idx = getIdx(str.charAt(i-m));
-            if (idx != -1) source[idx]--;
+            if (idx != -1) {
+                source[idx]--;
+            }
 
             if (check()) {
                 answer++;
