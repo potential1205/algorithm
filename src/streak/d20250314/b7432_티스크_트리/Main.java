@@ -3,31 +3,28 @@ package streak.d20250314.b7432_티스크_트리;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.HashMap;
 import java.util.Map;
 import java.util.StringTokenizer;
 import java.util.TreeMap;
 
 public class Main {
-
     static int n;
     static Node root;
+    static StringBuilder sb = new StringBuilder();
 
     static class Node {
         Map<String, Node> child = new TreeMap<>();
     }
 
-    static void print(Node cur, int depth) {
+    static void search(Node cur, int depth) {
         for (String path : cur.child.keySet()) {
-
             for (int i = 0; i < depth; i++) {
-                System.out.print(" ");
+                sb.append(" ");
             }
 
-            System.out.print(path);
-            System.out.println();
+            sb.append(path).append("\n");
 
-            print(cur.child.get(path), depth+1);
+            search(cur.child.get(path), depth+1);
         }
     }
 
@@ -50,6 +47,8 @@ public class Main {
             }
         }
 
-        print(root, 0);
+        search(root, 0);
+
+        System.out.print(sb);
     }
 }
