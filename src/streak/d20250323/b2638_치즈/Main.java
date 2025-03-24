@@ -11,7 +11,7 @@ public class Main {
     static int[] dy = {-1, 1, 0, 0};
     static int[] dx = {0, 0, -1, 1};
     static int[][] board;
-    static boolean[][] visit;
+    static boolean[][] isOutside;
 
     static class Node {
         int y;
@@ -33,7 +33,7 @@ public class Main {
                         int ny = i + dy[d];
                         int nx = j + dx[d];
 
-                        if (0 <= ny && ny < n && 0 <= nx && nx < m && board[ny][nx] == 0 && visit[ny][nx]) {
+                        if (0 <= ny && ny < n && 0 <= nx && nx < m && board[ny][nx] == 0 && isOutside[ny][nx]) {
                             cnt++;
                         }
                     }
@@ -50,8 +50,8 @@ public class Main {
         Queue<Node> queue = new LinkedList<>();
         queue.offer(new Node(0, 0));
 
-        visit = new boolean[n][m];
-        visit[0][0] = true;
+        isOutside = new boolean[n][m];
+        isOutside[0][0] = true;
 
         while(!queue.isEmpty()) {
             Node node = queue.poll();
@@ -60,9 +60,9 @@ public class Main {
                 int ny = node.y + dy[i];
                 int nx = node.x + dx[i];
 
-                if (0 <= ny && ny < n && 0 <= nx && nx < m && !visit[ny][nx] && board[ny][nx] == 0) {
+                if (0 <= ny && ny < n && 0 <= nx && nx < m && !isOutside[ny][nx] && board[ny][nx] == 0) {
                     queue.offer(new Node(ny, nx));
-                    visit[ny][nx] = true;
+                    isOutside[ny][nx] = true;
                 }
             }
         }
@@ -71,7 +71,7 @@ public class Main {
     static boolean isEnd() {
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < m; j++) {
-                if (board[i][j] != 0 || !visit[i][j]) {
+                if (!isOutside[i][j]) {
                     return false;
                 }
             }
