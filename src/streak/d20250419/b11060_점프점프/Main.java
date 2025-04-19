@@ -1,23 +1,26 @@
 package streak.d20250419.b11060_점프점프;
 
-import java.util.Arrays;
-import java.util.LinkedList;
-import java.util.Queue;
-import java.util.Scanner;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.*;
 
 public class Main {
 
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        int n = sc.nextInt();
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringTokenizer st = new StringTokenizer(br.readLine());
+
+        int n = Integer.parseInt(st.nextToken());
 
         int[] move = new int[n];
         int[] dp = new int[n];
         Arrays.fill(dp, Integer.MAX_VALUE);
         dp[0] = 0;
 
+        st = new StringTokenizer(br.readLine());
         for (int i = 0; i < n; i++) {
-            move[i] = sc.nextInt();
+            move[i] = Integer.parseInt(st.nextToken());
         }
 
         Queue<Integer> queue = new LinkedList<>();
