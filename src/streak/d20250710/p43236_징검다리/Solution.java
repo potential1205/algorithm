@@ -35,7 +35,6 @@ class Solution {
             if (getCount(rocks, mid, distance) <= n) {
                 answer = mid;
                 start = mid + 1;
-                System.out.println(answer + " " + n);
             } else {
                 end = mid - 1;
             }
