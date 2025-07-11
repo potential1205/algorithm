@@ -1,4 +1,4 @@
-package streak.d20250712;
+package streak.d20250712.p1845_폰켓몬;
 
 import java.util.*;
 

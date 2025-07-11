@@ -1,4 +1,4 @@
-package streak.d20250712.p1845_폰켓몬.p1843_사칙연산;
+package streak.d20250711.p1843_사칙연산;
 
 class Solution {
     public int solution(String arr[]) {
