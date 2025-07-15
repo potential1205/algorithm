@@ -24,8 +24,6 @@ class Solution {
             list2.offerLast(queue2[i]);
         }
 
-        long target = (total1 + total2) / 2;
-
         while (true) {
             if (total1 == total2) {
                 break;
