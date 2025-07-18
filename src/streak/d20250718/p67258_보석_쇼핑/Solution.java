@@ -26,25 +26,21 @@ class Solution {
     }
 
     public int[] solution(String[] gems) {
-        Set<String> gemTypeSet = new HashSet<>();
-        for (String gem : gems) gemTypeSet.add(gem);
-
-        int left = 0;
-        int right = 0;
-        int gemTypeCount = gemTypeSet.size();
-
         Set<String> stateSet = new HashSet<>();
         Map<String, Integer> stateMap = new HashMap<>();
 
-        for (String gem : gemTypeSet) stateMap.put(gem, 0);
+        for (String gem : gems) stateMap.put(gem, 0);
+
+        int left = 0;
+        int right = 0;
+        int gemTypeCount = stateMap.size();
+
         stateSet.add(gems[0]);
         stateMap.put(gems[0], 1);
 
         List<Node> nodeList = new ArrayList<>();
 
         while (true) {
-            if (left > right) break;
-
             if (stateSet.size() == gemTypeCount) {
                 nodeList.add(new Node(left, right));
 
@@ -52,6 +48,7 @@ class Solution {
                 if (stateMap.get(gems[left]) == 0) {
                     stateSet.remove(gems[left]);
                 }
+
                 left++;
             } else {
                 right++;
@@ -59,14 +56,11 @@ class Solution {
                 stateMap.put(gems[right], stateMap.get(gems[right]) + 1);
                 stateSet.add(gems[right]);
             }
+
         }
 
         Collections.sort(nodeList);
 
-        int[] answer = new int[2];
-        answer[0] = nodeList.get(0).left + 1;
-        answer[1] = nodeList.get(0).right + 1;
-
-        return answer;
+        return new int[] {nodeList.get(0).left + 1, nodeList.get(0).right + 1};
     }
 }
