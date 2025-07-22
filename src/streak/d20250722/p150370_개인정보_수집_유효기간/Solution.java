@@ -14,8 +14,6 @@ class Solution {
 
 	public int[] solution(String today, String[] terms, String[] privacies) {
 		List<Integer> list = new ArrayList<>();
-
-		String[] todaySplit = today.split("\\.");
 		int todayNum = dateToNum(today);
 
 		Map<String, Integer> map = new HashMap<>();
