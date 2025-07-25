@@ -7,8 +7,8 @@ class Solution {
 	static boolean[][] visit;
 
 	static int bfs(String[] maps, int n, int m, int sy, int sx) {
-		Queue<int[]> queue = new LinkedList<>();
-		queue.offer(new int[]{sy, sx});
+		ArrayDeque<int[]> queue = new ArrayDeque<>();
+		queue.offerFirst(new int[]{sy, sx});
 		visit[sy][sx] = true;
 
 		int[] dy = {-1, 1, 0, 0};
@@ -17,7 +17,7 @@ class Solution {
 		int size = 0;
 
 		while(!queue.isEmpty()) {
-			int[] cur = queue.poll();
+			int[] cur = queue.pollLast();
 			char ch = maps[cur[0]].charAt(cur[1]);
 			size += Integer.parseInt(ch + "");
 
@@ -35,7 +35,7 @@ class Solution {
 		return size;
 	}
 
-	public List<Integer> solution(String[] maps) {
+	public int[] solution(String[] maps) {
 		int n = maps.length;
 		int m = maps[0].length();
 		visit = new boolean[n][m];
@@ -56,6 +56,12 @@ class Solution {
 			answer.add(-1);
 		}
 
-		return answer;
+		int[] answerArr = new int[answer.size()];
+
+		for (int i = 0; i < answerArr.length; i++) {
+			answerArr[i] = answer.get(i);
+		}
+
+		return answerArr;
 	}
 }
