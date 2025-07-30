@@ -2,6 +2,7 @@ package streak.d20250730.p77486_다단계_칫솔_판매;
 
 import java.util.*;
 
+// 재귀 버전
 class Solution {
 
 	static Map<String, Integer> profit = new LinkedHashMap<>();
