@@ -9,16 +9,12 @@ class Solution {
 		int x;
 		int d;
 		int cost;
-		int cnt1;
-		int cnt2;
 
-		Node(int y, int x, int d, int cost, int cnt1, int cnt2) {
+		Node(int y, int x, int d, int cost) {
 			this.y = y;
 			this.x = x;
 			this.d = d;
 			this.cost = cost;
-			this.cnt1 = cnt1;
-			this.cnt2 = cnt2;
 		}
 	}
 
@@ -29,8 +25,8 @@ class Solution {
 		int[] dx = {0, 0, -1, 1};
 
 		ArrayDeque<Node> queue = new ArrayDeque<>();
-		queue.offer(new Node(0, 0, 1, 0, 0, 0));
-		queue.offer(new Node(0, 0, 3, 0, 0, 0));
+		queue.offer(new Node(0, 0, 1, 0));
+		queue.offer(new Node(0, 0, 3, 0));
 
 		int n = board.length;
 		int m = board[0].length;
@@ -48,7 +44,7 @@ class Solution {
 			Node cur = queue.poll();
 
 			if (cur.y == (n - 1) && cur.x == (m - 1)) {
-				answer = Math.min(answer, cur.cnt1 * 100 + cur.cnt2 * 500);
+				answer = Math.min(answer, cur.cost);
 			}
 
 			for (int i = 0; i < 4; i++) {
@@ -59,12 +55,12 @@ class Solution {
 
 				if (i == cur.d) {
 					if (visit[ny][nx][i] > (cur.cost + 100)) {
-						queue.offer(new Node(ny, nx, i, cur.cost + 100, cur.cnt1 + 1, cur.cnt2));
+						queue.offer(new Node(ny, nx, i, cur.cost + 100));
 						visit[ny][nx][i] = (cur.cost + 100);
 					}
 				} else {
 					if (visit[ny][nx][i] > (cur.cost + 600)) {
-						queue.offer(new Node(ny, nx, i, cur.cost + 600, cur.cnt1 + 1, cur.cnt2 + 1));
+						queue.offer(new Node(ny, nx, i, cur.cost + 600));
 						visit[ny][nx][i] = (cur.cost + 600);
 					}
 				}
