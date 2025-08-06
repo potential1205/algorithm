@@ -1,4 +1,4 @@
-package streak.d20250806.p9184_신나는_함수_실행;
+package streak.d20250806.b9184_신나는_함수_실행;
 
 import java.io.BufferedReader;
 import java.io.IOException;
