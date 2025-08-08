@@ -2,7 +2,7 @@ package streak.d20250808.p92343_양과_늑대;
 
 import java.util.*;
 
-class Solution {
+class Main {
 	static int n;
 	static int answer;
 	static int[] dp;
