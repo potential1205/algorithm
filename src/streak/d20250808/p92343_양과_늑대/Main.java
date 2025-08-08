@@ -2,7 +2,7 @@ package streak.d20250808.p92343_양과_늑대;
 
 import java.util.*;
 
-class Main {
+class Solution {
 	static int n;
 	static int answer;
 	static int[] dp;
@@ -16,16 +16,13 @@ class Main {
 
 		for (int i = 0; i < n; i++) {
 			if (((mask >> i) & 1) == 1) continue;
-
-			if (parent[i] == -1) continue;
 			if (((mask >> parent[i]) & 1) == 0) continue;
 
-			if (info[i] == 0 && sheep + 1 >= wolf) {
+			if (info[i] == 0 && sheep + 1 > wolf) {
 				dfs(mask | (1 << i), sheep + 1, wolf, info);
 			} else if (info[i] == 1 && sheep > wolf + 1) {
 				dfs(mask | (1 << i), sheep, wolf + 1, info);
 			}
-
 		}
 	}
 
