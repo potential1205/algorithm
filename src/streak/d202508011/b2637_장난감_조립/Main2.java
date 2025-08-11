@@ -70,10 +70,13 @@ public class Main2 {
             }
         }
 
+        StringBuilder sb = new StringBuilder();
         for (int i = 1; i <= n; i++) {
             if (inDegree[i] == 0) {
-                System.out.println(i + " " + answer[i]);
+                sb.append(i).append(" ").append(answer[i]).append("\n");
             }
         }
+
+        System.out.println(sb);
     }
 }
