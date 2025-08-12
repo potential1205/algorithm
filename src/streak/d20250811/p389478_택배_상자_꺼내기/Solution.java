@@ -1,4 +1,4 @@
-package streak.d202508011.p389478_택배_상자_꺼내기;
+package streak.d20250811.p389478_택배_상자_꺼내기;
 
 class Solution {
     public int solution(int n, int w, int num) {

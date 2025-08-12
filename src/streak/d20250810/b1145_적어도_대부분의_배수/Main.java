@@ -1,4 +1,4 @@
-package streak.d202508010.b1145_적어도_대부분의_배수;
+package streak.d20250810.b1145_적어도_대부분의_배수;
 
 import java.io.BufferedReader;
 import java.io.IOException;

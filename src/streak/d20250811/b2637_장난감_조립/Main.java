@@ -1,4 +1,4 @@
-package streak.d202508011.b2637_장난감_조립;
+package streak.d20250811.b2637_장난감_조립;
 
 import java.io.BufferedReader;
 import java.io.IOException;
