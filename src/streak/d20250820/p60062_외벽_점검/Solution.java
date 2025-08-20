@@ -51,13 +51,16 @@ class Solution {
             boolean[] next = Arrays.copyOf(isPossible, FULL + 1);
 
             for (int mask = 0; mask <= FULL; mask++) {
+                // id - 1 명일 때 mask가 불가능한 상태라면 무시
                 if (!isPossible[mask]) continue;
 
+                // id - 1 명일 때 mask가 가능한 상태였다면 해당 상태에 현재 상태를 추가
                 for (int i = 0; i < weakLen; i++) {
                     int nextMask = mask | cover[id][i];
                     next[nextMask] = true;
                 }
             }
+
             isPossible = next;
             if (isPossible[FULL]) return id + 1;
         }
