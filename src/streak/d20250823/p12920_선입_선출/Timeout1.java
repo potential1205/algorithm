@@ -1,6 +1,6 @@
-package streak.d20250822.p12920_선입_선출_스케쥴링;
+package streak.d20250823.p12920_선입_선출;
 
-import java.util.*;
+import java.util.PriorityQueue;
 
 class Timeout1 {
 
