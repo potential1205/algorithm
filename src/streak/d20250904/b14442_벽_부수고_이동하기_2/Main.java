@@ -71,7 +71,7 @@ public class Main {
                 } else if (board[ny][nx] == '1' && node.k + 1 <= k) {
                     if (dp[ny][nx][node.k + 1] > node.cnt + 1) {
                         queue.offer(new Node(ny, nx, node.k + 1, node.cnt + 1));
-                        dp[ny][nx][node.k + 1] = Math.min(dp[ny][nx][node.k + 1], node.cnt + 1);
+                        dp[ny][nx][node.k + 1] =  node.cnt + 1;
                     }
                 }
             }
