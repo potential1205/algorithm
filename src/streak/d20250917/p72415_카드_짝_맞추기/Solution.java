@@ -31,12 +31,6 @@ class Solution {
     static void permutation(int depth, int[][] board, int r, int c) {
         if (depth == cnt) {
 
-            // 처리해야될 카드 순서
-            for (int i = 0; i < cnt; i++) {
-                System.out.print(val[i] + " ");
-            }
-            System.out.println();
-
             // 배열 복사
             int[][] temp = new int[4][4];
             for (int i = 0; i < 4; i++) {
@@ -110,6 +104,7 @@ class Solution {
                         dp[ny][nx] = cur.cnt + 1;
                     }
                 }
+
 
                 // 첫번째카드부터 두번째카드까지
                 queue = new ArrayDeque<>();
