@@ -66,21 +66,9 @@ class Solution {
 
             canMove = true;
 
-            // 좌표 갱신
-            int nay = ay;
-            int nax = ax;
-            int nby = by;
-            int nbx = bx;
-
-            if (turnA) {
-                nay = ny;
-                nax = nx;
-            } else{
-                nby = ny;
-                nbx = nx;
-            }
-
-            Result child = dfs(depth + 1, nextMask, nay, nax, nby, nbx, !turnA);
+            Result child = turnA ?
+                    dfs(depth + 1, nextMask, ny, nx, by, bx, !turnA) :
+                    dfs(depth + 1, nextMask, ay, ax, ny, nx, !turnA);
 
             // 자식이 지면(상대 패배) 나는 승리
             if (!child.isWin) {
@@ -92,13 +80,10 @@ class Solution {
 
         Result result;
         if (!canMove) {
-            // 갈 곳이 없으면 패배
             result = new Result(depth, false);
         } else if (bestWinMoves != Integer.MAX_VALUE) {
-            // 승리 선택지가 하나라도 있으면 그 중 최소 이동 수
             result = new Result(bestWinMoves, true);
         } else {
-            // 모두 패배라면 최대 이동 수
             result = new Result(bestLoseMoves, false);
         }
 
