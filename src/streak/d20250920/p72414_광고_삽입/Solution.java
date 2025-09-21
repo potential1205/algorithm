@@ -1,4 +1,4 @@
-package streak.d20250915.p72414_광고_삽입;
+package streak.d20250920.p72414_광고_삽입;
 
 class Solution {
 
