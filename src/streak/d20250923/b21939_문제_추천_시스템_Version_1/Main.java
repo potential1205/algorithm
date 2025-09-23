@@ -12,9 +12,12 @@ public class Main {
         StringTokenizer st = new StringTokenizer(br.readLine());
         int n = Integer.parseInt(st.nextToken());
 
-        // 문제 번호, 문제 난이도
+        // 번호, 난이도
         Map<Integer, Integer> levelMap = new HashMap<>();
+
+        // 난이도, 문제 집합
         TreeMap<Integer, TreeSet<Integer>> problemInfo = new TreeMap<>();
+
         for (int i = 0; i < n; i++) {
             st = new StringTokenizer(br.readLine());
             int num = Integer.parseInt(st.nextToken());
@@ -59,7 +62,6 @@ public class Main {
                     int num = problemInfo.get(level).first();
                     System.out.println(num);
                 }
-
             } else if (cmd.equals("solved")) {
                 int num = Integer.parseInt(st.nextToken());
                 int level = levelMap.get(num);
@@ -67,8 +69,6 @@ public class Main {
                 set.remove(num);
                 if (set.isEmpty()) {
                     problemInfo.remove(level);
-                } else {
-                    problemInfo.put(level, set);
                 }
             }
         }
