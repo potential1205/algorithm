@@ -30,12 +30,10 @@ class Solution {
                     int maxY = i;
                     int minX = j;
                     int maxX = j;
-                    int count = 0;
 
                     for (int a = 0; a < n; a++) {
                         for (int b = 0; b < n; b++) {
                             if (board[i][j] == board[a][b]) {
-                                count++;
                                 visit[a][b] = true;
                                 minY = Math.min(minY, a);
                                 maxY = Math.max(maxY, a);
