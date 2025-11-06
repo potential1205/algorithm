@@ -31,7 +31,7 @@ class Solution {
 
             // emptyRoom에 방이 배정되었으므로 그 다음 빈 방 매핑하기
             long nextEmptyRoom = find(emptyRoom + 1);
-            map.put(room, nextEmptyRoom);
+            map.put(room, nextEmptyRoom); // 없어도 되지만 아주 조금 도움이 됨
             map.put(emptyRoom, nextEmptyRoom);
         }
 
