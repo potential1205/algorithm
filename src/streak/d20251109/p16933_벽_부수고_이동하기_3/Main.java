@@ -6,7 +6,7 @@ import java.io.InputStreamReader;
 import java.util.ArrayDeque;
 import java.util.StringTokenizer;
 
-public class Try {
+public class Main {
 
     static int N, M, K;
     static int[][][][] dp;
@@ -53,13 +53,9 @@ public class Try {
             Node cur = queue.poll();
             //System.out.println(cur);
 
-            int nextType = 0;
-            if (cur.type == DAY) {
-                nextType = NIGHT;
-            } else if (cur.type == NIGHT) {
-                nextType = DAY;
-            }
+            int nextType = (cur.type == DAY) ? NIGHT : DAY;
 
+            // 4방향
             for (int i = 0; i < 4; i++) {
                 int ny = cur.y + dy[i];
                 int nx = cur.x + dx[i];
@@ -75,20 +71,20 @@ public class Try {
 
                 // 벽일 떄
                 } else {
-                    // 낮이면 벽 부수기
                     if (cur.type == DAY) {
                         if ((cur.cnt - 1) >= 0 && (cur.dist + 1) < dp[ny][nx][cur.cnt - 1][nextType]) {
                             queue.offer(new Node(ny, nx, cur.dist + 1, cur.cnt - 1, nextType));
                             dp[ny][nx][cur.cnt - 1][nextType] = cur.dist + 1;
                         }
                     }
-                    // 밤이면 제자리 대기
-                    else {
-                        if ((cur.dist + 1) < dp[cur.y][cur.x][cur.cnt][nextType]) {
-                            queue.offer(new Node(cur.y, cur.x, cur.dist + 1, cur.cnt , nextType));
-                            dp[ny][nx][cur.cnt][nextType] = cur.dist + 1;
-                        }
-                    }
+                }
+            }
+
+            // 다음 이동 칸이 벽이고 현재 밤이면, 제자리이동
+            if (cur.type == NIGHT) {
+                if ((cur.dist + 1) < dp[cur.y][cur.x][cur.cnt][nextType]) {
+                    queue.offer(new Node(cur.y, cur.x, cur.dist + 1, cur.cnt , nextType));
+                    dp[cur.y][cur.x][cur.cnt][nextType] = cur.dist + 1;
                 }
             }
         }
