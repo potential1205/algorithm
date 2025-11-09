@@ -28,17 +28,6 @@ public class Main {
             this.cnt = cnt;
             this.type = type;
         }
-
-        @Override
-        public String toString() {
-            return "Node{" +
-                    "y=" + y +
-                    ", x=" + x +
-                    ", dist=" + dist +
-                    ", cnt=" + cnt +
-                    ", type=" + type +
-                    '}';
-        }
     }
 
     static void bfs() {
@@ -51,8 +40,6 @@ public class Main {
 
         while (!queue.isEmpty()) {
             Node cur = queue.poll();
-            //System.out.println(cur);
-
             int nextType = (cur.type == DAY) ? NIGHT : DAY;
 
             // 4방향
@@ -68,23 +55,21 @@ public class Main {
                         queue.offer(new Node(ny, nx, cur.dist + 1, cur.cnt, nextType));
                         dp[ny][nx][cur.cnt][nextType] = cur.dist + 1;
                     }
-
                 // 벽일 떄
                 } else {
-                    if (cur.type == DAY) {
-                        if ((cur.cnt - 1) >= 0 && (cur.dist + 1) < dp[ny][nx][cur.cnt - 1][nextType]) {
-                            queue.offer(new Node(ny, nx, cur.dist + 1, cur.cnt - 1, nextType));
-                            dp[ny][nx][cur.cnt - 1][nextType] = cur.dist + 1;
+
+                    // 낮인 경우, 벽을 부술 수 있는 횟수를 사용해서 이동
+                    if (cur.type == DAY && (cur.cnt - 1) >= 0 && (cur.dist + 1) < dp[ny][nx][cur.cnt - 1][nextType]) {
+                        queue.offer(new Node(ny, nx, cur.dist + 1, cur.cnt - 1, nextType));
+                        dp[ny][nx][cur.cnt - 1][nextType] = cur.dist + 1;
+                    }
+                    // 밤인 경우, 제자리 이동(대기)
+                    else if (cur.type == NIGHT) {
+                        if ((cur.dist + 1) < dp[cur.y][cur.x][cur.cnt][nextType]) {
+                            queue.offer(new Node(cur.y, cur.x, cur.dist + 1, cur.cnt , nextType));
+                            dp[cur.y][cur.x][cur.cnt][nextType] = cur.dist + 1;
                         }
                     }
-                }
-            }
-
-            // 다음 이동 칸이 벽이고 현재 밤이면, 제자리이동
-            if (cur.type == NIGHT) {
-                if ((cur.dist + 1) < dp[cur.y][cur.x][cur.cnt][nextType]) {
-                    queue.offer(new Node(cur.y, cur.x, cur.dist + 1, cur.cnt , nextType));
-                    dp[cur.y][cur.x][cur.cnt][nextType] = cur.dist + 1;
                 }
             }
         }
@@ -99,7 +84,7 @@ public class Main {
         K = Integer.parseInt(st.nextToken());
 
         board = new char[N][M];
-        dp = new int[N][M][K + 1][2];
+        dp = new int[N][M][K + 1][2]; // 해당 위치에 벽을 k번 부술 수 있을 때, 낮이거나 밤인 경우의 최단 경로를 저장
 
         for (int i = 0; i < N; i++) {
             String line = br.readLine();
