@@ -1,4 +1,4 @@
-package streak.d20251112.b12852_1로_만들기_2;
+package streak.d20251113.b12852_1로_만들기_2;
 
 import java.util.Scanner;
 
@@ -13,22 +13,24 @@ public class Main {
         parent[1] = 0;
 
         for (int i = 2; i <= n; i++) {
+
+            // i to i-1 까지 최소 횟수
             int best = dp[i - 1] + 1;
             int p = i - 1;
 
+            // i to i / 2 까지 최소 횟수
             if (i % 2 == 0) {
-                int cand = dp[i / 2] + 1;
-                if (cand < best) {
-                    best = cand;
+                if (dp[i / 2] < best) {
+                    best = Math.min(best, dp[i / 2] + 1);
                     p = i / 2;
                 }
             }
 
+            // i to i / 3 까지 최소 횟수
             if (i % 3 == 0) {
-                int cand = dp[i/3] + 1;
-                if (cand < best) {
-                    best = cand;
-                    p = i/3;
+                if (dp[i / 3] < best) {
+                    best = Math.min(best, dp[i / 3] + 1);
+                    p = i / 3;
                 }
             }
 
