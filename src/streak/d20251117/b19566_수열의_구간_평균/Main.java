@@ -61,6 +61,7 @@ public class Main {
         for (int i = 0; i < n; i++) {
             prefix += (arr[i] - k); // 모든 원소에 K 를 뺀 값에 대해 누적합을 구함, 그렇게 구한 누적합의 구간합이 0이 되는 경우를 찾으면 되므로
             long cnt = freq.getOrDefault(prefix, 0L);
+            System.out.println(cnt);
             answer += cnt; // 이전에 같은 prefix가 cnt번이 등장했다면 현재 등장한 값과 조합할 수 있으므로 cnt만큼 새로운 구간이 생김
             freq.put(prefix, cnt + 1);
         }
