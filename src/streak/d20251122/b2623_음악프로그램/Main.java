@@ -34,7 +34,7 @@ public class Main {
 
                 if (j > 0) {
                     graph.get(before).add(val);
-                    in[val]++;
+                    in[val]++; // 진입 차수 저장
                 }
 
                 before = val;
