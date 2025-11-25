@@ -1,4 +1,4 @@
-package daily.y2025.m11.d24.b2623_음악프로그램;
+package daily.y2025.m11.d24.r1.b2623_음악프로그램;
 
 import java.io.BufferedReader;
 import java.io.IOException;

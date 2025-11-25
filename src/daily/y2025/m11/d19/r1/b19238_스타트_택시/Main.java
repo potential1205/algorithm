@@ -1,4 +1,4 @@
-package daily.y2025.m11.d19.b19238_스타트_택시;
+package daily.y2025.m11.d19.r1.b19238_스타트_택시;
 
 import java.io.BufferedReader;
 import java.io.IOException;

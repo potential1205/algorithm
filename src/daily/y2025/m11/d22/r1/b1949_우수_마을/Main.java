@@ -1,4 +1,4 @@
-package daily.y2025.m11.d22.b1949_우수_마을;
+package daily.y2025.m11.d22.r1.b1949_우수_마을;
 
 import java.io.BufferedReader;
 import java.io.IOException;

@@ -1,4 +1,4 @@
-package daily.y2025.m11.d18.b19566_수열의_구간_평균;
+package daily.y2025.m11.d18.r1.b19566_수열의_구간_평균;
 
 import java.io.BufferedReader;
 import java.io.IOException;

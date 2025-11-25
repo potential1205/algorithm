@@ -1,4 +1,4 @@
-package daily.y2025.m11.d20.b16934_게임_닉네임;
+package daily.y2025.m11.d20.r1.b16934_게임_닉네임;
 
 import java.io.BufferedReader;
 import java.io.IOException;

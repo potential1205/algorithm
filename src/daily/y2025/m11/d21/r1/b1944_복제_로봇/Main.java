@@ -1,4 +1,4 @@
-package daily.y2025.m11.d21.b1944_복제_로봇;
+package daily.y2025.m11.d21.r1.b1944_복제_로봇;
 
 import java.io.BufferedReader;
 import java.io.IOException;
